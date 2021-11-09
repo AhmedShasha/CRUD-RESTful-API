@@ -8,7 +8,7 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
   
 // include database and object file
 include_once '../../config/Database.php';
-include_once '../../Model/product.php';
+include_once '../../Model/Product.php';
   
 // get database connection
 $database = new Database();

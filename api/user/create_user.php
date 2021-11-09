@@ -9,7 +9,7 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 // database connection will be here
 // files needed to connect to database
 include_once '../../config/Database.php';
-include_once '../../Model/user.php';
+include_once '../../Model/User.php';
  
 // get database connection
 $database = new Database();

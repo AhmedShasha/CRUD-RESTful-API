@@ -7,7 +7,7 @@ header("Content-Type: application/json; charset=UTF-8");
 include_once '../../config/Core.php';
 include_once '../../shared/utilities.php';
 include_once '../../config/Database.php';
-include_once '../../Model/product.php';
+include_once '../../Model/Product.php';
   
 // utilities
 $utilities = new Utilities();

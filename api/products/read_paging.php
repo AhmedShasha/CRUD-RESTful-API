@@ -9,7 +9,7 @@ include_once '../../shared/utilities.php';
 include_once '../../config/Database.php';
 include_once '../../Model/Product.php';
   
-// utilities
+// utilities pagination
 $utilities = new Utilities();
   
 // instantiate database and product object

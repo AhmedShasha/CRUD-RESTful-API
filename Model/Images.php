@@ -63,21 +63,17 @@ class Images
     function read_img($id)
     {
         // query to read single record
+        
         $query = "SELECT * FROM " . $this->table_name . " WHERE id=" . $id . "";
 
         // prepare query statement
         $stmt = $this->conn->prepare($query);
-
-        // bind id of image to get
-        // $stmt->bindParam(1, $this->id);
 
         // execute query
         $stmt->execute();
 
         // get retrieved row
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        // die(var_dump($row));
 
         // set values to object properties
         $this->id = $row['id'];

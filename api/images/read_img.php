@@ -8,7 +8,7 @@ header("Acess-Control-Allow-Headers: Acess-Control-Allow-Headers,Content-Type,Ac
 
 // get database connection
 include_once '../../config/Database.php';
-  
+
 // instantiate images object
 include_once '../../Model/Images.php';
 // Get DB connection 
@@ -23,12 +23,13 @@ $data = json_decode(file_get_contents("php://input"), true); // collect input pa
 $filePath = 'uploads/';
 
 // Read the image from DB 
-$img->read_img($_GET['id']);
 
 if ($img->id != null) {
+    $img->read_img($_GET['id']);
+
     $img_arr = array(
         'id' => $img->id,
-        'image' => $filePath.$img->image,
+        'image' => $filePath . $img->image,
     );
     // set response code - 200 OK
     http_response_code(200);

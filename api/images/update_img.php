@@ -42,46 +42,56 @@ if (array_key_exists('sendimage', $_FILES) && array_key_exists('id', $_REQUEST))
     $allFile = $filePath . $newName;
     // Valid image extensions
     $valid_extensions = array('jpeg', 'jpg', 'png', 'gif');
-    if (in_array($fileExt, $valid_extensions)) {
-        // Check file not exsit
 
-        if ($fileSize < 5000000) {
-            // Move Upload file 
-            unlink($filePath . $oldName);
-            move_uploaded_file($tempPath, $allFile);
-            // create the product
-
-            if ($img->update($newName)) {
-
-                // set response code - 200 ok
-                http_response_code(200);
-
+    if($img->id != null)
+    {
+        if (in_array($fileExt, $valid_extensions)) {
+            // Check file not exsit
+    
+            if ($fileSize < 5000000) {
+                // Move Upload file 
+                unlink($filePath . $oldName);
+                move_uploaded_file($tempPath, $allFile);
+                // create the product
+    
+                if ($img->update($newName)) {
+    
+                    // set response code - 200 ok
+                    http_response_code(200);
+    
+                    // tell the user
+                    echo json_encode(array("message" => "Image was updated."));
+                }
+    
+                // if unable to update the Image, tell the user
+                else {
+    
+                    // set response code - 503 service unavailable
+                    http_response_code(503);
+    
+                    // tell the user
+                    echo json_encode(array("message" => "Image not found."));
+                }
+            } else {
+                // set response code - 400 bad request
+                http_response_code(400);
+    
                 // tell the user
-                echo json_encode(array("message" => "Image was updated."));
-            }
-
-            // if unable to update the Image, tell the user
-            else {
-
-                // set response code - 503 service unavailable
-                http_response_code(503);
-
-                // tell the user
-                echo json_encode(array("message" => "Image not found."));
+                echo json_encode(array("message" => "Sorry, This file is more than 5MB", "status" => false));
             }
         } else {
             // set response code - 400 bad request
             http_response_code(400);
-
+    
             // tell the user
-            echo json_encode(array("message" => "Sorry, This file is more than 5MB", "status" => false));
+            echo json_encode(array("message" => "Sorry, Only JPG, JPEG, PNG, GIF", "status" => false));
         }
-    } else {
-        // set response code - 400 bad request
-        http_response_code(400);
-
-        // tell the user
-        echo json_encode(array("message" => "Sorry, Only JPG, JPEG, PNG, GIF", "status" => false));
+    }else{
+         // set response code - 400 bad request
+         http_response_code(400);
+    
+         // tell the user
+         echo json_encode(array("message" => "Image not found", "status" => false));
     }
 } else {
 
